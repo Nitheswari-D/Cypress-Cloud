@@ -1,6 +1,6 @@
 describe('Demo Web Shop - Login Test', function () {
   beforeEach(function () {
-    cy.fixture('logindata').then((data) => {
+    cy.fixture('LoginData').then((data) => {
       this.data = data;
     });
   });
