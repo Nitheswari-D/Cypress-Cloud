@@ -1,4 +1,4 @@
-name: Run Cypress Tests
+name: Run Cypress Tests in Parallel
 
 on:
   push:
@@ -11,6 +11,11 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        machine: [1, 2]   # Use 2 parallel machines
 
     steps:
       - name: Checkout code
@@ -26,5 +31,5 @@ jobs:
           npm install
           npm install cypress --save-dev
 
-      - name: Run visit_google.cy.js and record to Cypress Cloud
-        run: npx cypress run --spec "cypress/e2e/visit_google.cy.js" --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
+      - name: Run Cypress tests in parallel and record to Cypress Cloud
+        run: npx cypress run --record --parallel --key ${{ secrets.CYPRESS_RECORD_KE
