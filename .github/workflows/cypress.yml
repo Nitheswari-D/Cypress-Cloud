@@ -3,10 +3,10 @@ name: Run Cypress Tests
 on:
   push:
     branches:
-      - master      # Specify that this workflow should run for pushes to the master branch
+      - master
   pull_request:
     branches:
-      - master      # Specify that this workflow should also run for pull requests targeting the master branch
+      - master
 
 jobs:
   cypress-run:
@@ -26,5 +26,5 @@ jobs:
           npm install
           npm install cypress --save-dev
 
-      - name: Run only visit_google.cy.js
-        run: npx cypress run --spec "cypress/e2e/visit_google.cy.js"
+      - name: Run visit_google.cy.js and record to Cypress Cloud
+        run: npx cypress run --spec "cypress/e2e/visit_google.cy.js" --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
